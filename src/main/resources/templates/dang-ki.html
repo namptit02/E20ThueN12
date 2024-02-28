@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Đăng ký tài khoản')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="nav-now">Đăng ký tài khoản thuế thu nhập cá nhân</span>
+			</div>
+			<form name="form-register" th:object="${nguoiDung}" th:action="@{~/dang-ki}" onsubmit="validateDangKyForm(this); return false;" method="post">
+				<label th:if="${message}" th:text="${message}" class="message"></label>
+				<div class="box-common-content">
+                                    <table class="form-table" style="width: 65%">
+						<tbody>
+							<tr>
+								<td style="width: 30%">Mã số thuế<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+                                                                    <input type="text" id="mst" name="maSoThue" th:field="*{maSoThue}" style="width: 358px" autofocus="true"/>
+<!--									<label th:if="${#fields.hasErrors('maSoThue')}" th:errors="*{maSoThue}" class="error"></label>-->
+									<br /><label style="color: red" id="loiMst"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Họ và tên<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="ten" name="hoTen" th:field="*{hoTen}" style="width: 358px" />
+<!--									<label th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}" class="error"></label>-->
+									<br /><label style="color: red" id="loiHoTen"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Địa chỉ cư trú<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="diaChi" name="diaChi" th:field="*{diaChi}" style="width: 358px" />
+<!--									<label th:if="${#fields.hasErrors('diaChi')}" th:errors="*{diaChi}" class="error"></label>-->
+									<br /><label style="color: red" id="loiDiaChi"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Căn cước công dân<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="cccd" name="cccd" th:field="*{cccd}" style="width: 358px" />
+<!--									<label th:if="${#fields.hasErrors('cccd')}" th:errors="*{cccd}" class="error"></label>-->
+									<br /><label style="color: red" id="loiCccd"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Cơ quan thuế quản lý<font class="color-red">*
+									</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="coquanthue" name="coQuanThue" th:field="*{coQuanThue}" style="width: 358px" />
+<!--									<label th:if="${#fields.hasErrors('coQuanThue')}" th:errors="*{coQuanThue}" class="error"></label>-->
+									<br /><label style="color: red" id="loiCoQuanThue"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Số điện thoại<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="sdt" name="sdt" th:field="*{sdt}" style="width: 358px" />
+<!--									<label th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}" class="error"></label>-->
+									<br /><label style="color: red" id="loiSdt"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Email<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="email" name="email" th:field="*{email}" style="width: 358px" />
+<!--									<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></label>-->
+									<br /><label style="color: red" id="loiEmail"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Mật khẩu<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="password" id="matKhau" name="matKhau" style="width: 358px" />
+<!--									<label th:if="${errorPassword}" th:text="${errorPassword}" class="error"></label>-->
+									<br /><label style="color: red" id="loiMatKhau"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Nhập lại Mật khẩu<font class="color-red">*
+									</font>
+								</td>
+								<td style="text-align: left">
+									<input type="password" id="nhapLaiMatKhau" name="nhapLaiMatKhau" style="width: 358px" />
+<!--									<label th:if="${errorRepassword}" th:text="${errorRepassword}" class="error"></label>-->
+									<br /><label style="color: red" id="loiNhapLaiMatKhau"></label>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="submit" style="cursor: pointer" name="button-register" class="btn-fuction" value="Đăng ký"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

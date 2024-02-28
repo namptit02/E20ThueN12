@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Nộp thuế thu nhập cá nhân')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="text-nav">Nộp thuế » </span>
+				<span class="nav-now" th:text="'Tờ khai số '+${toKhaiThue.id}+' - Ngày '+${toKhaiThue.ngayNop}+': Mẫu số 02/KK-TNCN'" th:value="${toKhaiThue.id}"></span>
+			</div>
+			<form name="form-login" method="post" th:action="@{~/nop-thue/thong-tin-dong-thue}">
+				<label th:if="${param.login_error}" class="message">Tài khoản hoặc mật khẩu không chính xác!</label>
+				<label th:if="${message}" th:text="${message}" class="message"></label>
+				<div class="box-common-content">
+					<table class="form-table">
+						<tbody>
+							<tr>
+								<td style="width: 30%">Số tiền:</td>
+								<td style="text-align: left">
+									<span th:if="${toKhaiThue.cuTru}" th:text="${toKhaiThue.chiTieu29}+' VNĐ'"></span>
+									<span th:if="${!toKhaiThue.cuTru}" th:text="${toKhaiThue.chiTieu32}+' VNĐ'"></span>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Nộp tại địa chỉ:</td>
+								<td style="text-align: left">
+									VP Cục Thuế TP Hà Nội, Số 187 Giảng Võ, Đống Đa, Hà Nội
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Hoặc chuyển tiền tới:</td>
+								<td th:text="'0000000 Cục Thuế TP Hà Nội Agribank (nội dung chuyển tiền: ' +${toKhaiThue.id}+${toKhaiThue.nguoiDung.maSoThue}+')'" style="text-align: left"></td>
+							</tr>
+						</tbody>
+					</table>
+			</form>
+		</div>
+	</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

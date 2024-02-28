@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Thay đổi thông tin cá nhân')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="text-nav">Người dùng » </span>
+				<span class="nav-now">Đổi thông tin</span>
+			</div>
+			<form name="form-register" method="post" th:object="${nguoiDung}" onsubmit="return validateDoiThongTinForm();" th:action="@{~/nguoi-dung/doi-thong-tin}">
+				<label th:if="${message}" th:text="${message}" class="success-message" style="color: blue"></label>
+				<div class="box-common-content">
+					<table class="form-table" style="width: 65%">
+						<tbody>
+							<tr>
+								<td style="width: 30%">Mã số thuế<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="mst" name="maSoThue" th:value="*{maSoThue}" style="width: 358px" disabled/>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Họ và tên<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="ten" name="hoTen" th:value="*{hoTen}" style="width: 358px" disabled/>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Địa chỉ cư trú<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="diaChi" name="diaChi" th:value="*{diaChi}" style="width: 358px" autofocus="true"/>
+<!--									<label th:if="${errorDiaChi}" th:text="${errorDiaChi}" class="error"></label>-->
+									<br /><label style="color: red" id="loiDiaChi"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Căn cước công dân<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="cccd" name="cccd" th:value="*{cccd}" style="width: 358px" disabled/>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Cơ quan thuế quản lý<font class="color-red">*
+									</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="coquanthue" name="coQuanThue" th:value="*{coQuanThue}" style="width: 358px" />
+<!--									<label th:if="${errorCoQuanThue}" th:text="${errorCoQuanThue}" class="error"></label>-->
+									<br /><label style="color: red" id="loiCoQuanThue"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Số điện thoại<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="sdt" name="sdt" th:value="*{sdt}" style="width: 358px" />
+<!--									<label th:if="${errorSdt}" th:text="${errorSdt}" class="error"></label>-->
+									<br /><label style="color: red" id="loiSdt"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Email<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="text" id="email" name="email" th:value="*{email}" style="width: 358px" />
+<!--									<label th:if="${errorEmail}" th:text="${errorEmail}" class="error"></label>-->
+									<br /><label style="color: red" id="loiEmail"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%"></td>
+								<td>
+									<button type="submit" class="btn-fuction">Lưu thay đổi</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

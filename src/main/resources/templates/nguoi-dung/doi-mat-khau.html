@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Thay đổi mật khẩu')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="text-nav">Người dùng » </span>
+				<span class="nav-now">Đổi mật khẩu</span>
+			</div>
+			<form name="form-change-password" onsubmit="return validateDoiMatKhau();" method="post" th:action="@{/nguoi-dung/doi-mat-khau}">
+				<label th:if="${message}" th:text="${message}" class="message"></label>
+				<label th:if="${successMessage}" th:text="${successMessage}" class="success-message"></label>
+				<div class="box-common-content">
+					<table class="form-table" style="width: 65%">
+						<tbody>
+							<tr>
+								<td style="width: 30%">Mật khẩu mới<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<input type="password" id="matKhauMoi" name="matKhauMoi" style="width: 358px" autofocus="true"/>
+									<br /><label style="color: red" id="loiMatKhauMoi"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%">Nhập lại Mật khẩu<font class="color-red">*
+									</font>
+								</td>
+								<td style="text-align: left">
+									<input type="password" id="nhapDoiLaiMatKhau" name="nhapLaiMatKhau" style="width: 358px" />
+									<br /><label style="color: red" id="loiNhapDoiLaiMatKhau"></label>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 30%"></td>
+								<td>
+									<button type="submit" class="btn-fuction">Đổi mật khẩu</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

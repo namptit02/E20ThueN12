@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Thông tin cá nhân')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="nav-now">Người dùng</span>
+			</div>
+			<div class="box-common-content">
+				<label th:if="${message}" th:text="${message}" class="success-message"></label>
+				<table class="form-table" style="width: 65%">
+					<tbody>
+						<tr>
+							<td style="width: 30%">Mã số thuế</td>
+							<td style="text-align: left">
+								<input type="text" id="mst" name="maSoThue" th:value="${nguoiDung.maSoThue}" style="width: 358px" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%">Họ và tên</td>
+							<td style="text-align: left">
+								<input type="text" id="ten" name="hoTen" th:value="${nguoiDung.hoTen}" style="width: 358px" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%">Địa chỉ cư trú</td>
+							<td style="text-align: left">
+								<input type="text" id="diaChi" name="diaChi" th:value="${nguoiDung.diaChi}" style="width: 358px" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%">Căn cước công dân</td>
+							<td style="text-align: left">
+								<input type="text" id="cccd" name="cccd" th:value="${nguoiDung.cccd}" style="width: 358px" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%">Cơ quan thuế quản lý</td>
+							<td style="text-align: left">
+								<input type="text" id="coquanthue" name="coQuanThue" th:value="${nguoiDung.coQuanThue}" style="width: 358px" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%">Số điện thoại</td>
+							<td style="text-align: left">
+								<input type="text" id="sdt" name="sdt" th:value="${nguoiDung.sdt}" style="width: 358px" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%">Email</td>
+							<td style="text-align: left">
+								<input type="text" id="email" name="email" th:value="${nguoiDung.email}" style="width: 358px" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%">Tờ khai đã nộp</td>
+							<td style="text-align: left">
+								<select name="mauTKhai" id="mauTKhai" style="width: 380px">
+									<option th:each="toKhaiThue : ${nguoiDung.toKhaiThueList}" th:text="'Tờ khai số '+${toKhaiThue.id}+' - Ngày '+${toKhaiThue.ngayNop}+': Mẫu số 02/KK-TNCN'" th:value="${toKhaiThue.id}"></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 30%"></td>
+							<td>
+								<button class="btn-fuction"><a th:href="@{~/nguoi-dung/doi-thong-tin}">Đổi thông tin</a></button>
+								<button class="btn-fuction"><a th:href="@{~/nguoi-dung/doi-mat-khau}">Đổi mật khẩu</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Kê khai thuế thu nhập cá nhân')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="nav-now">Kê khai thuế</span>
+			</div>
+                    <form id="declarationForm" th:action="@{~/khai-thue/to-khai}" method="get">
+				<div class="box-common-content">
+					<table class="form-table">
+						<tbody>
+							<tr>
+								<td style="text-align: right; width: 30%">Chọn tờ khai</td>
+								<td style="text-align: left">
+									<select name="mauTKhai" id="mauTKhai" style="width: 530px" autofocus="true">
+										<option value="KKTNCN02" selected>
+											02/KK-TNCN - Tờ khai thuế thu nhập cá nhân mẫu số 02/KK-TNCN
+										</option>
+									</select>
+								</td>
+							</tr>
+                                                        <tr>
+							<td></td>
+							<td>
+                                                            <button type="submit" style="margin-left: 230px" class="btn-fuction">Tiếp tục</button>
+							</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Nộp thuế thu nhập cá nhân')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="nav-now">Nộp thuế</span>
+			</div>
+			<form id="declarationForm" th:action="@{~/nop-thue/xem-lai-to-khai}" method="post">
+                            <label th:if="${message}" th:text="${message}" class="success-message" style="color: #0099db"></label>
+				<div class="box-common-content">
+					<table class="form-table">
+						<tbody>
+							<tr>
+								<td style="text-align: right; width: 30%">Chọn tờ khai</td>
+								<td style="text-align: left">
+									<select name="idToKhai" id="toKhai" style="width: 530px" autofocus="true">
+										<option th:if="${not #lists.isEmpty(nguoiDung.toKhaiThueList)}" th:each="toKhaiThue : ${nguoiDung.toKhaiThueList}" th:text="'Tờ khai số '+${toKhaiThue.id}+' - Ngày '+${toKhaiThue.ngayNop}+': Mẫu số 02/KK-TNCN'" th:value="${toKhaiThue.id}"></option>
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td></td>
+								<td>
+									<button style="margin-left: 230px" type="submit" id="btnConNopThue" class="btn-fuction" th:disabled="${#lists.isEmpty(nguoiDung.toKhaiThueList)}">Tiếp tục</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

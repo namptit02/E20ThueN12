@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<!-- Fragment #1 : Header -->
+<head th:fragment="header (pageTitle)">
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" th:href="@{~/css/style.css}" type="text/css" />
+	<script th:src="@{~/js/jquery.min.js}" type="text/javascript"></script>
+	<script th:src="@{~/js/districts.min.js}" type="text/javascript"></script>
+	<script th:src="@{~/js/index.js}" type="text/javascript"></script>
+	<title th:text="${pageTitle}"></title>
+</head>
+
+<body>
+	<!-- Fragment #2 : Side bar -->
+	<div th:fragment="sidebar">
+		<div class="banner">
+			<div class="logo">
+				<img th:src="@{~/images/logo.png}" />
+				<img th:src="@{~/images/sitename.png}" />
+			</div>
+			<div sec:authorize="isAnonymous()" class="dangnhap">
+				<button class="btn-head">
+					<a th:href="@{~/dang-nhap}">Đăng nhập</a>
+				</button>
+				<button class="btn-head">
+					<a th:href="@{~/dang-ki}">Đăng ký</a>
+				</button>
+			</div>
+			<div sec:authorize="isAuthenticated()" class="dangnhap">
+                <button class="btn-head" style="pointer-events: none;">
+                    <span >Xin chào, </span>
+                    <strong th:text="${#authentication.getPrincipal().getHoTen()}"></strong>
+                </button>
+				<button class="btn-head">
+					<a th:href="@{~/dang-xuat}">Đăng xuất</a>
+				</button>
+			</div>
+		</div>
+		<div id="tabs" class="menu">
+			<ul id="tabmenu">
+				<li>
+					<a th:classappend="${#request.requestURI == '/' ? 'tab current':'tab'}" th:href="@{/}"><span>Trang chủ</span></a>
+				</li>
+				<li>
+					<a th:classappend="${#request.requestURI.startsWith('/khai-thue') ? 'tab current':'tab'}" th:href="@{~/khai-thue}"><span>Kê khai thuế</span></a>
+				</li>
+				<li>
+					<a th:classappend="${#request.requestURI.startsWith('/nop-thue') ? 'tab current':'tab'}" th:href="@{~/nop-thue}"><span>Nộp thuế</span></a>
+				</li>
+				<li>
+					<a th:classappend="${#request.requestURI.startsWith('/nguoi-dung') ? 'tab current':'tab'}" th:href="@{~/nguoi-dung}"><span>Thông tin cá nhân</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+		
+	<!-- Fragment #3 : Footer -->
+	<div class="footer" th:fragment="footer">
+		<strong>Thuế Việt Nam - Cổng thông tin điện tử của Tổng cục Thuế </strong><br>
+		<strong>Cơ quan chủ quản:</strong> <span>Bộ Tài chính</span><br>
+		<strong>Địa chỉ:</strong> <span>123 Lò Đúc - Quận Hai Bà Trưng - Hà Nội</span>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Hệ thống hỗ trợ tính thuế thu nhập cá nhân')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+
+		<div class="content">
+			<center><img style="padding-top:10px;" th:src="@{~/images/cover.jpg}" alt="cover" width="60%" /></center>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>

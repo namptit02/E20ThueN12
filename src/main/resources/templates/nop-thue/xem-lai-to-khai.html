@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: header (pageTitle='Nộp thuế thu nhập cá nhân')"></head>
+
+<body>
+	<div class="main">
+		<div th:insert="fragment.html :: sidebar"></div>
+		<div class="content">
+			<div class="title-nav">
+				<span class="text-nav">Trang chủ » </span>
+				<span class="text-nav">Nộp thuế » </span>
+				<span class="nav-now" th:text="'Tờ khai số '+${toKhaiThue.id}+' - Ngày '+${toKhaiThue.ngayNop}+': Mẫu số 02/KK-TNCN'" th:value="${toKhaiThue.id}"></span>
+			</div>
+			<h1 style="text-align: center;">Tờ khai thuế thu nhập cá nhân</h1>
+			<span class="subtitle">(Áp dụng cho cá nhân cư trú và cá nhân không cư trú có thu nhập từ tiền lương,
+				tiền<br /> công khai thuế trực tiếp với cơ quan thuế)</span>
+			<form id="formToKhai" th:object="${toKhaiThue}" th:action="@{~/nop-thue/thong-tin-dong-thue}" method="post">
+				<div class="box-common-content">
+                                    <table class="form-table">
+						<tbody>
+							<input type="hidden" name="id" th:field="*{id}" style="width: 365px"/>
+							<tr>
+								<td style="width: 45%">Kỳ tính thuế<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<select name="kyTinhThue" style="width: 387px" readonly>
+										<option th:text="*{kyTinhThue}" selected></option>
+									</select>
+								</td>
+							</tr>
+
+							<tr th:if="*{kyTinhThue=='Quý'}">
+								<td style="width: 45%">Quý kê khai<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<select name="quyKeKhai" style="width: 387px" readonly>
+										<option th:text="*{quyKeKhai}" selected></option>
+									</select>
+								</td>
+							</tr>
+
+							<tr th:if="*{kyTinhThue=='Tháng'}">
+								<td style="width: 45%">Tháng kê khai<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<select name="thangKeKhai" style="width: 387px" readonly>
+										<option th:text="*{thangKeKhai}" selected>Tháng 1</option>
+									</select>
+								</td>
+							</tr>
+
+							<tr id="nam">
+								<td style="width: 45%">Năm<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input name="namKeKhai" th:field="*{namKeKhai}" style="width: 365px" type="number" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Loại tờ khai<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<select name="loaiToKhai" style="width: 387px" readonly>
+										<option th:text="*{loaiToKhai}" selected></option>
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Tên người nộp thuế<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input type="text" name="hoTen" th:field="*{hoTen}" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Mã số thuế<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input type="text" name="maSoThue" th:field="*{maSoThue}" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Địa chỉ<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input type="text" name="diaChi" th:field="*{diaChi}" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+
+							<tr>
+								<td style="width: 45%">Tỉnh/thành phố<font class="color-red">*</font></td>
+								<td style="text-align: left">
+                                                                    <input type="text" name="tinhThanh" th:field="*{tinhThanh}" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Quận/huyện<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input type="text" name="quanHuyen" th:field="*{quanHuyen}" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Điện thoại</td>
+								<td style="text-align: left">
+									<input th:field="*{sdt}" name="sdt" type="text" style="width: 365px" readonly />
+
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Fax</td>
+								<td style="text-align: left">
+									<input th:field="*{fax}" name="fax" type="text" style="width: 365px" readonly />
+
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Email<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input th:field="*{email}" name="email" type="email" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<div th:if="*{daiLyThue}">
+							<tr>
+								<td style="width: 45%">Đại lý thuế</td>
+								<td style="text-align: left">
+                                                                    <input th:field="*{daiLyThue}" type="checkbox" name="daiLyThue" checked disabled/>
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Tên đại lý thuế<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input th:field="*{tenDaiLyThue}" name="tenDaiLyThue" type="text" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Mã số thuế ĐLT<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input th:field="*{maSoThueDLT}" name="maSoThueDLT" type="text" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Địa chỉ ĐLT<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input th:field="*{diaChiDLT}" name="diaChiDLT" type="text" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+
+							<tr>
+								<td style="width: 45%">Tỉnh/thành phố ĐLT<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input type="text" name="tinhThanhDLT" th:field="*{tinhThanhDLT}" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+
+							<tr>
+								<td style="width: 45%">Quận/huyện ĐLT<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input type="text" name="quanHuyenDLT" th:field="*{quanHuyenDLT}" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+
+							<tr>
+								<td style="width: 45%">Điện thoại ĐLT</td>
+								<td style="text-align: left">
+									<input type="text" th:field="*{sdtDLT}" name="sdtDLT" style="width: 365px" readonly />
+
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Fax ĐLT</td>
+								<td style="text-align: left">
+									<input type="text" th:field="*{faxDLT}" name="faxDLT" style="width: 365px" readonly />
+
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">Email ĐLT<font class="color-red">*</font></td>
+								<td style="text-align: left">
+									<input type="email" th:field="*{emailDLT}" name="emailDLT" style="width: 365px" readonly />
+								</td>
+							</tr>
+
+							<tr>
+								<td style="width: 45%">
+									Hợp đồng đại lý thuế<font class="color-red">*</font>
+								</td>
+								<td style="text-align: left">
+									<label>Số</label>
+									<input th:field="*{soHopDong}" name="soHopDong" type="text" style="width: 137px" readonly />
+									<label>Ngày</label>
+									<input th:field="*{ngayHopDong}" name="ngayHopDong" placeholder="dd-mm-yyyy" min="1950-01-01" max="2050-12-31" type="date" style="width: 137px" readonly />
+								</td>
+							</tr>
+							</div>
+						</tbody>
+					</table>
+					<table class="form-table-khaithue">
+						<tbody>
+							<div th:if="*{cuTru}">
+								<tr>
+									<td colspan="3">
+										Cá nhân cư trú có thu nhập từ tiền lương, tiền công
+									</td>
+									<td style="text-align: left">
+										<input type="checkbox" name="cuTru" checked disabled/>
+									</td>
+								</tr>
+
+								<tr>
+									<td>1</td>
+									<td colspan="2">Tổng thu nhập chịu thuế phát sinh trong kỳ</td>
+									<td style="text-align: left">
+										<input type="number" name="chiTieu20" th:field="*{chiTieu20}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>2</td>
+									<td colspan="2">
+										Thu nhập chịu thuế được miễn giảm theo hiệp định
+									</td>
+									<td style="text-align: left">
+										<input type="number" name="chiTieu21" th:field="*{chiTieu21}"
+											style="width: 300px" readonly />
+										<br /><label style="color: red" id="loiMienGiam"></label>
+									</td>
+								</tr>
+
+								<tr>
+									<td rowspan="6">3</td>
+									<td colspan="2">Tổng các khoản giảm trừ</td>
+									<td style="text-align: left">
+										<input type="number" name="tongGiamTru" th:field="*{chiTieu22}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>a</td>
+									<td>Cho bản thân</td>
+									<td style="text-align: left">
+										<input type="number" name="giamTruBanThan" th:field="*{chiTieu23}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>b</td>
+									<td>Cho người phụ thuộc</td>
+									<td style="text-align: left">
+										<input type="number" name="chiTieu24" th:field="*{chiTieu24}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>c</td>
+									<td>Cho từ thiện, nhân đạo, khuyến học</td>
+									<td style="text-align: left">
+										<input type="number" name="chiTieu25" th:field="*{chiTieu25}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>d</td>
+									<td>Các khoản đóng bảo hiểm được trừ</td>
+									<td style="text-align: left">
+										<input type="number" name="chiTieu26" th:field="*{chiTieu26}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td></td>
+									<td>Khoản đóng quỹ hưu trí tự nguyện được trừ</td>
+									<td style="text-align: left">
+										<input type="number" name="chiTieu27" th:field="*{chiTieu27}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>4</td>
+									<td colspan="2">Tổng thu nhập tính thuế</td>
+									<td style="text-align: left">
+										<input type="number" name="thuNhapTinhThue" th:field="*{chiTieu28}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>5</td>
+									<td colspan="2">
+										Tổng số thuế thu nhập cá nhân phát sinh trong kỳ
+									</td>
+									<td style="text-align: left">
+										<input type="number" name="thueThuNhapCaNhan" th:field="*{chiTieu29}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+							</div>
+
+							<div th:if="*{!cuTru}">
+								<tr>
+									<td colspan="3">
+										Cá nhân không cư trú có thu nhập từ tiền lương, tiền công
+									</td>
+									<td style="text-align: left">
+										<input type="checkbox" id="khongCuTru" checked disabled/>
+									</td>
+								</tr>
+
+								<tr>
+									<td>1</td>
+									<td colspan="2">Tổng thu nhập tính thuế</td>
+									<td style="text-align: left">
+										<input type="number" name="chiTieu30" th:field="*{chiTieu30}"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>2</td>
+									<td colspan="2">Mức thuế suất (%)</td>
+									<td style="text-align: left">
+										<input value="20" type="number" name="mucThueSuat" style="width: 300px"
+											readonly />
+									</td>
+								</tr>
+
+								<tr>
+									<td>3</td>
+									<td colspan="2">Tổng số thuế thu nhập cá nhân phải nộp</td>
+									<td style="text-align: left">
+										<input type="number" th:field="*{chiTieu32}" name="thueThuNhapCaNhanKCT"
+											style="width: 300px" readonly />
+									</td>
+								</tr>
+							</div>
+
+							<tr>
+								<td colspan="3"></td>
+								<td>
+									<button style="margin-left: 230px" type="submit" class="btn-fuction">Đóng thuế</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:insert="fragment.html :: footer"></div>
+</body>
+
+</html>
